@@ -32,7 +32,7 @@ No installation needed — just copy the `Logger` class into your project.
 OR 
 
 Include it as a JS file
-<script type="application/javascript" src="logger.js') }}"></script>
+<script type="application/javascript" src="logger.js"></script>
 
 ---
 
