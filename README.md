@@ -84,7 +84,7 @@ logger.warn("This is a warning", { trace: true }, { details: "extra info" });
 
 Each log line shows the file and line number where the log was called:
 ```bash
-[INFO] /src/index.js:27:10 User logged in
+[INFO]  User logged in  /src/index.js:27:10
 ```
 
 ---
