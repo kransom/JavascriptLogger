@@ -1,5 +1,5 @@
 # JavascriptLogger - Short Description
-Wrapper Logger on the browser's console.log method. Helps setup log level. You can adjust the level in real-time with helper functions.
+This wrapper logger helps manage log output by setting log levels (e.g., debug, info, warning, error). You can dynamically adjust these levels during runtime using helper functions.
 
 
 # 🪵 JavascriptLogger - (Custom JavaScript Logger) - Long Description
@@ -51,3 +51,5 @@ logger.debug("This won't show");
 
 logger.setTrace(true); // Force a group stack trace
 logger.warn("Show message and stack trace");
+
+
