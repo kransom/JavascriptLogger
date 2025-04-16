@@ -51,5 +51,46 @@ logger.debug("This won't show");
 
 logger.setTrace(true); // Force a group stack trace
 logger.warn("Show message and stack trace");
+```
 
+---
 
+## 📊 Log Level Reference
+
+|Level | Description |
+| ------------- | ------------- |
+|DEBUG | Verbose debugging info |
+|INFO | General info logs |
+|WARN | Warnings |
+|ERROR | Errors/failures |
+|OFF | Disable logging |
+
+---
+
+## 🧪 Trace Mode
+
+Add { trace: true } anywhere in the arguments to:
+
+Group the log
+
+Print a full stack trace
+```js
+logger.warn("This is a warning", { trace: true }, { details: "extra info" });
+```
+
+---
+
+## 🧩 File & Line Reporting
+
+Each log line shows the file and line number where the log was called:
+```bash
+[INFO] /src/index.js:27:10 User logged in
+```
+
+---
+
+## 📁 License
+MIT – Feel free to use and modify.
+```yaml
+Let me know if you'd like this turned into a downloadable file or integrated into your project structure.
+```
