@@ -71,11 +71,20 @@ logger.warn("Show message and stack trace");
 
 Add { trace: true } anywhere in the arguments to:
 
-Group the log
+Group the log and Print a full stack trace
 
-Print a full stack trace
 ```js
 logger.warn("This is a warning", { trace: true }, { details: "extra info" });
+```
+
+Example Output
+```pgsql
+▼ [WARN] /src/index.js:12:5
+  Cache miss on key: user:123
+  console.trace
+    at Logger.log (logger.js:75:18)
+    at Logger.warn (logger.js:31:10)
+    at Object.<anonymous> (index.js:12:5)
 ```
 
 ---
