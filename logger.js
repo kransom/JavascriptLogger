@@ -14,6 +14,8 @@
  logger.setTrace(true);
  logger.setTrace(false);
 
+ console.log("Log history:", logger.getHistory());
+
 ********************************/
 
 // Log level enum
@@ -28,10 +30,15 @@ const LOGLEVEL = {
 //default trace flag
 const LOGLEVELTRACE = false;
 
+//Default Log History MAX
+const LOGMAXHISTORY = 500;
+
 class Logger {
-    constructor(level = LOGLEVEL.INFO, traceLevel = LOGLEVELTRACE) {
+    constructor(level = LOGLEVEL.INFO, traceLevel = LOGLEVELTRACE, historyMax = LOGMAXHISTORY) {
         this.level = level;
         this.traceLevel = traceLevel;
+        this.history = [];
+        this.historyMax = historyMax;
     }
 
     debug(message, ...args) {
@@ -51,6 +58,26 @@ class Logger {
     }
 
     log(logLevel, message, ...args) {
+
+        const levelLabel = `[${Object.keys(LOGLEVEL).find(key => LOGLEVEL[key] === logLevel)}]`;
+        const location = this.getCallerLocation();
+        const timestamp = new Date().toISOString();
+
+        // Add to history
+        this.history.push({
+            level: levelLabel,
+            timestamp,
+            location,
+            message,
+            args
+        });
+
+        // Keep only the last 200 logs
+        if (this.history.length > this.historyMax) {
+            this.history.splice(0, this.history.length - this.historyMax);
+        }
+
+        // Console Log if valid level
         if (logLevel >= this.level) {
             let logFn;
             switch (logLevel) {
@@ -73,8 +100,6 @@ class Logger {
                     logFn = console.log;
             }
 
-            const levelLabel = `[${Object.keys(LOGLEVEL).find(key => LOGLEVEL[key] === logLevel)}]`;
-
             // Extract trace option from args (if any)
             let trace = false;
             args = args.filter(arg => {
@@ -84,11 +109,10 @@ class Logger {
                 }
                 return true;
             });
-
+          
             const isPrimitive = (val) =>
                 typeof val === 'string' || typeof val === 'number' || typeof val === 'boolean';
 
-            const location = this.getCallerLocation();
             const locationfix = `${location ? ' ' + location : ''}`;
 
             if (isPrimitive(message)) {
@@ -137,4 +161,13 @@ class Logger {
     setTrace(traceLevel) {
         this.traceLevel = traceLevel;
     }
+
+    getHistory() {
+        return this.history;
+    }
+
+    clearHistory() {
+        this.history = [];
+    }
+
 }
