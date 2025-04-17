@@ -51,6 +51,8 @@ logger.debug("This won't show");
 
 logger.setTrace(true); // Force a group stack trace
 logger.warn("Show message and stack trace");
+
+console.log("Log history:", logger.getHistory());
 ```
 
 ---
